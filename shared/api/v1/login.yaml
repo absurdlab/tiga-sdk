@@ -1,0 +1,151 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Tiga Login API
+  description: API to facilitate exchanges of authentication with identity provider during the authorization request.
+  contact:
+    name: Weinan Qiu
+    email: imu@elan-vision.com
+  license:
+    name: ElanVision
+
+paths:
+  /oauth/authorize/session/{session_id}/login:
+    get:
+      summary: Retrieve the authentication request.
+      operationId: getAuthenticationRequest
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      responses:
+        200:
+          description: Return authentication request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationRequest"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+  /oauth/authorize/session/{session_id}/login/success:
+    post:
+      summary: Post successful login response to Tiga.
+      operationId: callbackAuthenticationSuccess
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticationCallback"
+      responses:
+        200:
+          description: Callback success
+        204:
+          description: Callback success
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+  /oauth/authorize/session/{session_id}/login/failure:
+    post:
+      summary: Post error login response to Tiga.
+      operationId: callbackAuthenticationFailure
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./common.yaml#/components/schemas/ErrorCallback"
+      responses:
+        200:
+          description: Callback success
+        204:
+          description: Callback success
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+components:
+
+  parameters:
+    sessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+  responses:
+    ErrorResponse:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "./common.yaml#/components/schemas/ErrorResponse"
+
+  schemas:
+    AuthenticationRequest:
+      required:
+        - client
+        - prompts
+        - acr_values
+        - sub_hint
+        - login_hint
+        - ui_locales
+        - links
+      properties:
+        client:
+          $ref: "./common.yaml#/components/schemas/ClientInfo"
+        prompts:
+          type: array
+          items:
+            type: string
+          description: Optional array containing prompt parameters.
+        max_age:
+          type: integer
+          format: int64
+          description: Optional max_age parameter.
+        acr_values:
+          type: array
+          items:
+            type: string
+          description: Optional array of requested ACR values for the authentication.
+        sub_hint:
+          type: string
+          description: Optional subject identifier to request authentication for.
+        login_hint:
+          type: string
+          description: Optional login hint parameter to pass on to the identity provider.
+        ui_locales:
+          type: array
+          items:
+            type: string
+          description: Optional list of preferred UI locales.
+        links:
+          $ref: "./common.yaml#/components/schemas/Links"
+    AuthenticationCallback:
+      required:
+        - sid
+        - sub
+        - auth_time
+        - amr
+        - acr
+      properties:
+        sid:
+          type: string
+          description: Identifier of the user session as a result of authentication.
+        sub:
+          type: string
+          description: Subject identifier of the authenticated user.
+        auth_time:
+          type: integer
+          format: int64
+          description: Unix timestamp for time of authentication.
+        amr:
+          type: array
+          items:
+            type: string
+          description: A list of authentication methods applied.
+        acr:
+          type: string
+          description: Authentication context class reference.

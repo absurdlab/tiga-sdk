@@ -1,0 +1,42 @@
+- url: https://test.tiga.elan-vision.com/oauth/token
+  method: POST
+  status: 200
+  body: |
+    {
+      "access_token": "this_is_a_dummy_token",
+      "token_type": "Bearer",
+      "expires_in": 600
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/logout/session/ok
+  method: GET
+  status: 200
+  body: |
+    {
+      "client": {
+        "client_name": "test"
+      },
+      "sub": "foo"
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/logout/session/bad
+  method: GET
+  status: 400
+  body: |
+    {
+      "status": 400,
+      "error": "bad_request"
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/logout/session/ok/success
+  method: POST
+  status: 204
+
+- url: https://test.tiga.elan-vision.com/oauth/logout/session/bad/success
+  method: POST
+  status: 400
+  body: |
+    {
+      "status": 400,
+      "error": "bad_request"
+    }

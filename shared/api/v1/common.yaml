@@ -1,0 +1,116 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Common V1 Types
+  contact:
+    name: Weinan Qiu
+    email: imu@elan-vision.com
+  license:
+    name: ElanVision
+
+paths: {}
+
+components:
+  schemas:
+    ClientInfo:
+      description: |
+        ClientInfo contains public client information that can be used to visually identity the client.
+      required:
+        - client_name
+        - contacts
+        - logo_uri
+        - client_uri
+        - policy_uri
+        - tos_uri
+      properties:
+        client_name:
+          type: string
+          description: Name of the registered client.
+        contacts:
+          type: array
+          items:
+            type: string
+          description: Optional list of emails that a user may contact for questions.
+        logo_uri:
+          type: string
+          description: Optional URL for the client's logo image.
+        client_uri:
+          type: string
+          description: Optional URL for the client's home page.
+        policy_uri:
+          type: string
+          description: Optional URL for the client's privacy policy page.
+        tos_uri:
+          type: string
+          description: Optional URL for the client's terms of service page.
+
+    Links:
+      required:
+        - success_callback_url
+        - error_callback_url
+        - resume_url
+      properties:
+        success_callback_url:
+          type: string
+          description: URL to callback a successful response.
+        error_callback_url:
+          type: string
+          description: URL to callback an error response.
+        resume_url:
+          type: string
+          description: URL to redirect user to in order to resume processing.
+
+    ErrorCallback:
+      required:
+        - timestamp
+        - trace_id
+        - error
+        - error_description
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the time the error occurred.
+        trace_id:
+          type: string
+          description: Optional trace id at the client site to help debugging.
+        error:
+          type: string
+          description: Error code.
+        error_description:
+          type: string
+          description: Optional human-readable explanation of the error.
+
+    ErrorResponse:
+      required:
+        - status
+        - timestamp
+        - path
+        - request_id
+        - trace_id
+        - error
+        - error_description
+      properties:
+        status:
+          type: integer
+          description: HTTP status.
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the time the error occurred.
+        path:
+          type: string
+          description: URI path of the request.
+        request_id:
+          type: string
+          description: Optional request id.
+        trace_id:
+          type: string
+          description: Optional trace id.
+        error:
+          type: string
+          description: Error code.
+        error_description:
+          type: string
+          description: Optional human-readable explanation to the error.

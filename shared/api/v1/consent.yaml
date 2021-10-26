@@ -1,0 +1,136 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Tiga Consent API
+  description: API to facilitate exchanges of consent data during authorization request.
+  contact:
+    name: Weinan Qiu
+    email: imu@elan-vision.com
+  license:
+    name: ElanVision
+
+paths:
+  /oauth/authorize/session/{session_id}/consent:
+    get:
+      summary: Retrieve the consent request.
+      operationId: getConsentRequest
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      responses:
+        200:
+          description: Return consent request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsentRequest"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "./common.yaml#/components/schemas/ErrorResponse"
+  /oauth/authorize/session/{session_id}/consent/success:
+    post:
+      summary: Post successful consent response to Tiga.
+      operationId: callbackConsentSuccess
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentCallback"
+      responses:
+        200:
+          description: Callback success
+        204:
+          description: Callback success
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+  /oauth/authorize/session/{session_id}/consent/failure:
+    post:
+      summary: Post error login response to Tiga.
+      operationId: callbackConsentFailure
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./common.yaml#/components/schemas/ErrorCallback"
+      responses:
+        200:
+          description: Callback success
+        204:
+          description: Callback success
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+components:
+  parameters:
+    sessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+  responses:
+    ErrorResponse:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "./common.yaml#/components/schemas/ErrorResponse"
+
+  schemas:
+    ConsentRequest:
+      required:
+        - client
+        - sub
+        - prompts
+        - scopes
+        - ui_locales
+        - links
+      properties:
+        client:
+          $ref: "./common.yaml#/components/schemas/ClientInfo"
+        sub:
+          type: string
+          description: Subject identifier for the user whose consent is needed.
+        prompts:
+          type: array
+          items:
+            type: string
+          description: |
+            Optional array containing prompt parameters. This fields exists only for backward compatibility
+            purposes but is no longer useful. The consent prompts processing capability is moved to the Tiga server.
+            When prompts contains PromptConsent, all requested scopes are always included in this request and requires
+            user approval, regardless of previous grant records. When prompts contains PromptNone, the consent
+            interaction will not happen. By default, only the un-granted scopes are included in this request.
+            For the sake of the identity provider, it is fine to ignore the prompts and just process the list of
+            scopes included in this request.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: List of scope that reuqires user consent.
+        ui_locales:
+          type: array
+          items:
+            type: string
+          description: Optional list of preferred UI locales.
+        links:
+          $ref: "./common.yaml#/components/schemas/Links"
+    ConsentCallback:
+      required:
+        - granted_scopes
+      properties:
+        granted_scopes:
+          type: array
+          items:
+            type: string
+          description: List of scopes granted by the user.

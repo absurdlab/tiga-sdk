@@ -1,0 +1,46 @@
+- url: https://test.tiga.elan-vision.com/oauth/token
+  method: POST
+  status: 200
+  body: |
+    {
+      "access_token": "this_is_a_dummy_token",
+      "token_type": "Bearer",
+      "expires_in": 600
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/authorize/session/ok/login
+  method: GET
+  status: 200
+  body: |
+    {
+      "client": {
+        "client_name": "test"
+      },
+      "prompts": [
+        "none"
+      ],
+      "max_age": 600,
+      "sub_hint": "foo"
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/authorize/session/bad/login
+  method: GET
+  status: 400
+  body: |
+    {
+      "status": 400,
+      "error": "bad_request"
+    }
+
+- url: https://test.tiga.elan-vision.com/oauth/authorize/session/ok/login/success
+  method: POST
+  status: 204
+
+- url: https://test.tiga.elan-vision.com/oauth/authorize/session/bad/login/success
+  method: POST
+  status: 400
+  body: |
+    {
+      "status": 400,
+      "error": "bad_request"
+    }

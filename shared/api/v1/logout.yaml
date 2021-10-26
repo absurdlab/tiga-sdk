@@ -1,0 +1,98 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Tiga Interaction API
+  description: API to facilitate exchanges of data during user interaction stage of the authorization request.
+  contact:
+    name: Weinan Qiu
+    email: imu@elan-vision.com
+  license:
+    name: ElanVision
+
+paths:
+  /oauth/authorize/session/{session_id}/logout:
+    get:
+      summary: Retrieve the logout request.
+      operationId: getLogoutRequest
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      responses:
+        200:
+          description: Return logout request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogoutRequest"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+  /oauth/authorize/session/{session_id}/logout/success:
+    post:
+      summary: Post success logout response to Tiga.
+      operationId: callbackLogoutSuccess
+      parameters:
+        - $ref: "#/components/parameters/sessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogoutCallback"
+      responses:
+        200:
+          description: Callback success
+        204:
+          description: Callback success
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+components:
+  parameters:
+    sessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+  responses:
+    ErrorResponse:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "./common.yaml#/components/schemas/ErrorResponse"
+
+  schemas:
+    LogoutRequest:
+      required:
+        - client
+        - sub
+        - sid
+        - ui_locales
+        - links
+      properties:
+        client:
+          $ref: "./common.yaml#/components/schemas/ClientInfo"
+        sub:
+          type: string
+          description: |
+            Subject identifier of the authenticated user. The identity provider will attempt to terminate all sessions
+            associated with this subject if approved by user.
+        sid:
+          type: string
+          description: Session identifier previously provided by the identity provider.
+        ui_locales:
+          type: array
+          items:
+            type: string
+          description: Optional list of preferred UI locales.
+        links:
+          $ref: "./common.yaml#/components/schemas/Links"
+    LogoutCallback:
+      required:
+        - logged_out
+      properties:
+        logged_out:
+          type: boolean
+          description: True when user approved log out and has been loged out of the identity provider.
