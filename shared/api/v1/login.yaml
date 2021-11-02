@@ -101,26 +101,44 @@ components:
           items:
             type: string
           description: Optional array containing prompt parameters.
+          x-oapi-codegen-extra-tags:
+            json: prompts,omitempty
+            yaml: prompts,omitempty
         max_age:
           type: integer
           format: int64
           description: Optional max_age parameter.
+          x-oapi-codegen-extra-tags:
+            json: max_age,omitempty
+            yaml: max_age,omitempty
         acr_values:
           type: array
           items:
             type: string
           description: Optional array of requested ACR values for the authentication.
+          x-oapi-codegen-extra-tags:
+            json: acr_values,omitempty
+            yaml: acr_values,omitempty
         sub_hint:
           type: string
           description: Optional subject identifier to request authentication for.
+          x-oapi-codegen-extra-tags:
+            json: sub_hint,omitempty
+            yaml: sub_hint,omitempty
         login_hint:
           type: string
           description: Optional login hint parameter to pass on to the identity provider.
+          x-oapi-codegen-extra-tags:
+            json: login_hint,omitempty
+            yaml: login_hint,omitempty
         ui_locales:
           type: array
           items:
             type: string
           description: Optional list of preferred UI locales.
+          x-oapi-codegen-extra-tags:
+            json: ui_locales,omitempty
+            yaml: ui_locales,omitempty
         links:
           $ref: "./common.yaml#/components/schemas/Links"
     AuthenticationCallback:
@@ -134,18 +152,33 @@ components:
         sid:
           type: string
           description: Identifier of the user session as a result of authentication.
+          x-oapi-codegen-extra-tags:
+            json: sid,omitempty
+            yaml: sid,omitempty
         sub:
           type: string
           description: Subject identifier of the authenticated user.
+          x-oapi-codegen-extra-tags:
+            json: sub,omitempty
+            yaml: sub,omitempty
         auth_time:
           type: integer
           format: int64
           description: Unix timestamp for time of authentication.
+          x-oapi-codegen-extra-tags:
+            json: auth_time,omitempty
+            yaml: auth_time,omitempty
         amr:
           type: array
           items:
             type: string
           description: A list of authentication methods applied.
+          x-oapi-codegen-extra-tags:
+            json: amr,omitempty
+            yaml: amr,omitempty
         acr:
           type: string
           description: Authentication context class reference.
+          x-oapi-codegen-extra-tags:
+            json: acr,omitempty
+            yaml: acr,omitempty

@@ -10,14 +10,14 @@ import (
 // ConsentCallback defines model for ConsentCallback.
 type ConsentCallback struct {
 	// List of scopes granted by the user.
-	GrantedScopes []string `json:"granted_scopes"`
+	GrantedScopes []string `json:"granted_scopes,omitempty" yaml:"granted_scopes,omitempty"`
 }
 
 // ConsentRequest defines model for ConsentRequest.
 type ConsentRequest struct {
 	// ClientInfo contains public client information that can be used to visually identity the client.
-	Client externalRef0.ClientInfo `json:"client"`
-	Links  externalRef0.Links      `json:"links"`
+	Client externalRef0.ClientInfo `json:"client,omitempty" yaml:"client,omitempty"`
+	Links  externalRef0.Links      `json:"links,omitempty" yaml:"links,omitempty"`
 
 	// Optional array containing prompt parameters. This fields exists only for backward compatibility
 	// purposes but is no longer useful. The consent prompts processing capability is moved to the Tiga server.
@@ -26,16 +26,16 @@ type ConsentRequest struct {
 	// interaction will not happen. By default, only the un-granted scopes are included in this request.
 	// For the sake of the identity provider, it is fine to ignore the prompts and just process the list of
 	// scopes included in this request.
-	Prompts []string `json:"prompts"`
+	Prompts []string `json:"prompts,omitempty" yaml:"prompts,omitempty"`
 
 	// List of scope that reuqires user consent.
-	Scopes []string `json:"scopes"`
+	Scopes []string `json:"scopes,omitempty" yaml:"scopes,omitempty"`
 
 	// Subject identifier for the user whose consent is needed.
-	Sub string `json:"sub"`
+	Sub string `json:"sub,omitempty" yaml:"sub,omitempty"`
 
 	// Optional list of preferred UI locales.
-	UiLocales []string `json:"ui_locales"`
+	UiLocales []string `json:"ui_locales,omitempty" yaml:"ui_locales,omitempty"`
 }
 
 // SessionId defines model for sessionId.

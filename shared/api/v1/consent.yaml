@@ -101,6 +101,9 @@ components:
         sub:
           type: string
           description: Subject identifier for the user whose consent is needed.
+          x-oapi-codegen-extra-tags:
+            json: sub,omitempty
+            yaml: sub,omitempty
         prompts:
           type: array
           items:
@@ -113,16 +116,25 @@ components:
             interaction will not happen. By default, only the un-granted scopes are included in this request.
             For the sake of the identity provider, it is fine to ignore the prompts and just process the list of
             scopes included in this request.
+          x-oapi-codegen-extra-tags:
+            json: prompts,omitempty
+            yaml: prompts,omitempty
         scopes:
           type: array
           items:
             type: string
           description: List of scope that reuqires user consent.
+          x-oapi-codegen-extra-tags:
+            json: scopes,omitempty
+            yaml: scopes,omitempty
         ui_locales:
           type: array
           items:
             type: string
           description: Optional list of preferred UI locales.
+          x-oapi-codegen-extra-tags:
+            json: ui_locales,omitempty
+            yaml: ui_locales,omitempty
         links:
           $ref: "./common.yaml#/components/schemas/Links"
     ConsentCallback:
@@ -134,3 +146,6 @@ components:
           items:
             type: string
           description: List of scopes granted by the user.
+          x-oapi-codegen-extra-tags:
+            json: granted_scopes,omitempty
+            yaml: granted_scopes,omitempty

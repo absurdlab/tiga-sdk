@@ -10,24 +10,24 @@ import (
 // LogoutCallback defines model for LogoutCallback.
 type LogoutCallback struct {
 	// True when user approved log out and has been loged out of the identity provider.
-	LoggedOut bool `json:"logged_out"`
+	LoggedOut bool `json:"logged_out,omitempty" yaml:"logged_out,omitempty"`
 }
 
 // LogoutRequest defines model for LogoutRequest.
 type LogoutRequest struct {
 	// ClientInfo contains public client information that can be used to visually identity the client.
-	Client externalRef0.ClientInfo `json:"client"`
-	Links  externalRef0.Links      `json:"links"`
+	Client externalRef0.ClientInfo `json:"client,omitempty" yaml:"client,omitempty"`
+	Links  externalRef0.Links      `json:"links,omitempty" yaml:"links,omitempty"`
 
 	// Session identifier previously provided by the identity provider.
-	Sid string `json:"sid"`
+	Sid string `json:"sid,omitempty" yaml:"sid,omitempty"`
 
 	// Subject identifier of the authenticated user. The identity provider will attempt to terminate all sessions
 	// associated with this subject if approved by user.
-	Sub string `json:"sub"`
+	Sub string `json:"sub,omitempty" yaml:"sub,omitempty"`
 
 	// Optional list of preferred UI locales.
-	UiLocales []string `json:"ui_locales"`
+	UiLocales []string `json:"ui_locales,omitempty" yaml:"ui_locales,omitempty"`
 }
 
 // SessionId defines model for sessionId.

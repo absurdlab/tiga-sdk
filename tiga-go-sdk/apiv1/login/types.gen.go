@@ -10,44 +10,44 @@ import (
 // AuthenticationCallback defines model for AuthenticationCallback.
 type AuthenticationCallback struct {
 	// Authentication context class reference.
-	Acr string `json:"acr"`
+	Acr string `json:"acr,omitempty" yaml:"acr,omitempty"`
 
 	// A list of authentication methods applied.
-	Amr []string `json:"amr"`
+	Amr []string `json:"amr,omitempty" yaml:"amr,omitempty"`
 
 	// Unix timestamp for time of authentication.
-	AuthTime int64 `json:"auth_time"`
+	AuthTime int64 `json:"auth_time,omitempty" yaml:"auth_time,omitempty"`
 
 	// Identifier of the user session as a result of authentication.
-	Sid string `json:"sid"`
+	Sid string `json:"sid,omitempty" yaml:"sid,omitempty"`
 
 	// Subject identifier of the authenticated user.
-	Sub string `json:"sub"`
+	Sub string `json:"sub,omitempty" yaml:"sub,omitempty"`
 }
 
 // AuthenticationRequest defines model for AuthenticationRequest.
 type AuthenticationRequest struct {
 	// Optional array of requested ACR values for the authentication.
-	AcrValues []string `json:"acr_values"`
+	AcrValues []string `json:"acr_values,omitempty" yaml:"acr_values,omitempty"`
 
 	// ClientInfo contains public client information that can be used to visually identity the client.
-	Client externalRef0.ClientInfo `json:"client"`
-	Links  externalRef0.Links      `json:"links"`
+	Client externalRef0.ClientInfo `json:"client,omitempty" yaml:"client,omitempty"`
+	Links  externalRef0.Links      `json:"links,omitempty" yaml:"links,omitempty"`
 
 	// Optional login hint parameter to pass on to the identity provider.
-	LoginHint string `json:"login_hint"`
+	LoginHint string `json:"login_hint,omitempty" yaml:"login_hint,omitempty"`
 
 	// Optional max_age parameter.
-	MaxAge *int64 `json:"max_age,omitempty"`
+	MaxAge *int64 `json:"max_age,omitempty" yaml:"max_age,omitempty"`
 
 	// Optional array containing prompt parameters.
-	Prompts []string `json:"prompts"`
+	Prompts []string `json:"prompts,omitempty" yaml:"prompts,omitempty"`
 
 	// Optional subject identifier to request authentication for.
-	SubHint string `json:"sub_hint"`
+	SubHint string `json:"sub_hint,omitempty" yaml:"sub_hint,omitempty"`
 
 	// Optional list of preferred UI locales.
-	UiLocales []string `json:"ui_locales"`
+	UiLocales []string `json:"ui_locales,omitempty" yaml:"ui_locales,omitempty"`
 }
 
 // SessionId defines model for sessionId.

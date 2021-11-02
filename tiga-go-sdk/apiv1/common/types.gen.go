@@ -6,71 +6,71 @@ package commonv1
 // ClientInfo contains public client information that can be used to visually identity the client.
 type ClientInfo struct {
 	// Name of the registered client.
-	ClientName string `json:"client_name"`
+	ClientName string `json:"client_name,omitempty" yaml:"client_name,omitempty"`
 
 	// Optional URL for the client's home page.
-	ClientUri string `json:"client_uri"`
+	ClientUri string `json:"client_uri,omitempty" yaml:"client_uri,omitempty"`
 
 	// Optional list of emails that a user may contact for questions.
-	Contacts []string `json:"contacts"`
+	Contacts []string `json:"contacts,omitempty" yaml:"contacts,omitempty"`
 
 	// Optional URL for the client's logo image.
-	LogoUri string `json:"logo_uri"`
+	LogoUri string `json:"logo_uri,omitempty" yaml:"logo_uri,omitempty"`
 
 	// Optional URL for the client's privacy policy page.
-	PolicyUri string `json:"policy_uri"`
+	PolicyUri string `json:"policy_uri,omitempty" yaml:"policy_uri,omitempty"`
 
 	// Optional URL for the client's terms of service page.
-	TosUri string `json:"tos_uri"`
+	TosUri string `json:"tos_uri,omitempty" yaml:"tos_uri,omitempty"`
 }
 
 // ErrorCallback defines model for ErrorCallback.
 type ErrorCallback struct {
 	// Error code.
-	Error string `json:"error"`
+	Error string `json:"error,omitempty" yaml:"error,omitempty"`
 
 	// Optional human-readable explanation of the error.
-	ErrorDescription string `json:"error_description"`
+	ErrorDescription string `json:"error_description,omitempty" yaml:"error_description,omitempty"`
 
 	// Unix timestamp of the time the error occurred.
-	Timestamp int64 `json:"timestamp"`
+	Timestamp int64 `json:"timestamp,omitempty" yaml:"timestamp,omitempty"`
 
 	// Optional trace id at the client site to help debugging.
-	TraceId string `json:"trace_id"`
+	TraceId string `json:"trace_id,omitempty" yaml:"trace_id,omitempty"`
 }
 
 // ErrorResponse defines model for ErrorResponse.
 type ErrorResponse struct {
 	// Error code.
-	Error string `json:"error"`
+	Error string `json:"error,omitempty" yaml:"error,omitempty"`
 
 	// Optional human-readable explanation to the error.
-	ErrorDescription string `json:"error_description"`
+	ErrorDescription string `json:"error_description,omitempty" yaml:"error_description,omitempty"`
 
 	// URI path of the request.
-	Path string `json:"path"`
+	Path string `json:"path,omitempty" yaml:"path,omitempty"`
 
 	// Optional request id.
-	RequestId string `json:"request_id"`
+	RequestId string `json:"request_id,omitempty" yaml:"request_id,omitempty"`
 
 	// HTTP status.
-	Status int `json:"status"`
+	Status int `json:"status,omitempty" yaml:"status,omitempty"`
 
 	// Unix timestamp of the time the error occurred.
-	Timestamp int64 `json:"timestamp"`
+	Timestamp int64 `json:"timestamp,omitempty" yaml:"timestamp,omitempty"`
 
 	// Optional trace id.
-	TraceId string `json:"trace_id"`
+	TraceId string `json:"trace_id,omitempty" yaml:"trace_id,omitempty"`
 }
 
 // Links defines model for Links.
 type Links struct {
 	// URL to callback an error response.
-	ErrorCallbackUrl string `json:"error_callback_url"`
+	ErrorCallbackUrl string `json:"error_callback_url,omitempty" yaml:"error_callback_url,omitempty"`
 
 	// URL to redirect user to in order to resume processing.
-	ResumeUrl string `json:"resume_url"`
+	ResumeUrl string `json:"resume_url,omitempty" yaml:"resume_url,omitempty"`
 
 	// URL to callback a successful response.
-	SuccessCallbackUrl string `json:"success_callback_url"`
+	SuccessCallbackUrl string `json:"success_callback_url,omitempty" yaml:"success_callback_url,omitempty"`
 }

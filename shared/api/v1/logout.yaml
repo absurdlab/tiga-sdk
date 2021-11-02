@@ -79,14 +79,23 @@ components:
           description: |
             Subject identifier of the authenticated user. The identity provider will attempt to terminate all sessions
             associated with this subject if approved by user.
+          x-oapi-codegen-extra-tags:
+            json: sub,omitempty
+            yaml: sub,omitempty
         sid:
           type: string
           description: Session identifier previously provided by the identity provider.
+          x-oapi-codegen-extra-tags:
+            json: sid,omitempty
+            yaml: sid,omitempty
         ui_locales:
           type: array
           items:
             type: string
           description: Optional list of preferred UI locales.
+          x-oapi-codegen-extra-tags:
+            json: ui_locales,omitempty
+            yaml: ui_locales,omitempty
         links:
           $ref: "./common.yaml#/components/schemas/Links"
     LogoutCallback:
@@ -96,3 +105,6 @@ components:
         logged_out:
           type: boolean
           description: True when user approved log out and has been loged out of the identity provider.
+          x-oapi-codegen-extra-tags:
+            json: logged_out,omitempty
+            yaml: logged_out,omitempty

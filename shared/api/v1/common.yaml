@@ -27,23 +27,44 @@ components:
         client_name:
           type: string
           description: Name of the registered client.
+          x-oapi-codegen-extra-tags:
+            json: client_name,omitempty
+            yaml: client_name,omitempty
         contacts:
           type: array
           items:
             type: string
           description: Optional list of emails that a user may contact for questions.
+          x-oapi-codegen-extra-tags:
+            json: contacts,omitempty
+            yaml: contacts,omitempty
         logo_uri:
           type: string
           description: Optional URL for the client's logo image.
+          x-oapi-codegen-extra-tags:
+            json: logo_uri,omitempty
+            yaml: logo_uri,omitempty
         client_uri:
           type: string
           description: Optional URL for the client's home page.
+          x-oapi-codegen-extra-tags:
+            json: client_uri,omitempty
+            yaml: client_uri,omitempty
         policy_uri:
           type: string
           description: Optional URL for the client's privacy policy page.
+          x-oapi-codegen-extra-tags:
+            json: policy_uri,omitempty
+            yaml: policy_uri,omitempty
         tos_uri:
           type: string
           description: Optional URL for the client's terms of service page.
+          x-oapi-codegen-extra-tags:
+            json: tos_uri,omitempty
+            yaml: tos_uri,omitempty
+      x-oapi-codegen-extra-tags:
+        json: client,omitempty
+        yaml: client,omitempty
 
     Links:
       required:
@@ -54,12 +75,24 @@ components:
         success_callback_url:
           type: string
           description: URL to callback a successful response.
+          x-oapi-codegen-extra-tags:
+            json: success_callback_url,omitempty
+            yaml: success_callback_url,omitempty
         error_callback_url:
           type: string
           description: URL to callback an error response.
+          x-oapi-codegen-extra-tags:
+            json: error_callback_url,omitempty
+            yaml: error_callback_url,omitempty
         resume_url:
           type: string
           description: URL to redirect user to in order to resume processing.
+          x-oapi-codegen-extra-tags:
+            json: resume_url,omitempty
+            yaml: resume_url,omitempty
+      x-oapi-codegen-extra-tags:
+        json: links,omitempty
+        yaml: links,omitempty
 
     ErrorCallback:
       required:
@@ -72,15 +105,27 @@ components:
           type: integer
           format: int64
           description: Unix timestamp of the time the error occurred.
+          x-oapi-codegen-extra-tags:
+            json: timestamp,omitempty
+            yaml: timestamp,omitempty
         trace_id:
           type: string
           description: Optional trace id at the client site to help debugging.
+          x-oapi-codegen-extra-tags:
+            json: trace_id,omitempty
+            yaml: trace_id,omitempty
         error:
           type: string
           description: Error code.
+          x-oapi-codegen-extra-tags:
+            json: error,omitempty
+            yaml: error,omitempty
         error_description:
           type: string
           description: Optional human-readable explanation of the error.
+          x-oapi-codegen-extra-tags:
+            json: error_description,omitempty
+            yaml: error_description,omitempty
 
     ErrorResponse:
       required:
@@ -95,22 +140,43 @@ components:
         status:
           type: integer
           description: HTTP status.
+          x-oapi-codegen-extra-tags:
+            json: status,omitempty
+            yaml: status,omitempty
         timestamp:
           type: integer
           format: int64
           description: Unix timestamp of the time the error occurred.
+          x-oapi-codegen-extra-tags:
+            json: timestamp,omitempty
+            yaml: timestamp,omitempty
         path:
           type: string
           description: URI path of the request.
+          x-oapi-codegen-extra-tags:
+            json: path,omitempty
+            yaml: path,omitempty
         request_id:
           type: string
           description: Optional request id.
+          x-oapi-codegen-extra-tags:
+            json: request_id,omitempty
+            yaml: request_id,omitempty
         trace_id:
           type: string
           description: Optional trace id.
+          x-oapi-codegen-extra-tags:
+            json: trace_id,omitempty
+            yaml: trace_id,omitempty
         error:
           type: string
           description: Error code.
+          x-oapi-codegen-extra-tags:
+            json: error,omitempty
+            yaml: error,omitempty
         error_description:
           type: string
           description: Optional human-readable explanation to the error.
+          x-oapi-codegen-extra-tags:
+            json: error_description,omitempty
+            yaml: error_description,omitempty
