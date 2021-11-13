@@ -30,6 +30,10 @@ func (_ route) UserInfoURL(baseUrl string) string {
 	return fmt.Sprintf("%s/oauth/token/userinfo", trimTrailingSlash(baseUrl))
 }
 
+func (_ route) LogoutURL(baseUrl string) string {
+	return fmt.Sprintf("%s/oauth/logout", trimTrailingSlash(baseUrl))
+}
+
 func (_ route) DiscoveryURL(baseUrl string) string {
 	return fmt.Sprintf("%s/.well-known/openid-configuration", trimTrailingSlash(baseUrl))
 }
